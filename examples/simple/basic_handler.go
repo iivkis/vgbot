@@ -8,14 +8,14 @@ import (
 )
 
 type BasicHandler struct {
-	botapi vgtypes.VKBotAPI
+	vkapi vgtypes.VKAPI
 }
 
 func NewBasicHandler(
-	botapi vgtypes.VKBotAPI,
-) vgtypes.RouteAdjuster {
+	vkapi vgtypes.VKAPI,
+) vgtypes.RouteHandler {
 	return &BasicHandler{
-		botapi: botapi,
+		vkapi: vkapi,
 	}
 }
 
@@ -23,6 +23,6 @@ func (h *BasicHandler) Setup(r vgtypes.Router) {
 	r.On(
 		vgstd.MessageFilter(),
 	)(func(ctx context.Context, update vgtypes.Update) {
-		h.botapi.PrintHello()
+		h.vkapi.Messages().Send("", "")
 	})
 }

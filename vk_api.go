@@ -1,22 +1,34 @@
 package vgbot
 
 import (
-	"fmt"
-
 	vgtypes "github.com/iivkis/vgbot/types"
 )
 
-type VKBotAPI struct {
+type VKMessagesAPI struct {
+}
+
+func NewVKMessagesAPI() vgtypes.VKMessagesAPI {
+	return &VKMessagesAPI{}
+}
+
+func (v *VKMessagesAPI) Delete(peerID int, messageID int) error {
+	panic("unimplemented")
+}
+
+func (v *VKMessagesAPI) Send(peerID string, message string) error {
+	panic("unimplemented")
+}
+
+type VKAPI struct {
 	token string
 }
 
-func NewVKBotAPI(token string) vgtypes.VKBotAPI {
-	return &VKBotAPI{
+func NewVKAPI(token string) vgtypes.VKAPI {
+	return &VKAPI{
 		token: token,
 	}
 }
 
-// PrintHello implements vgtypes.VKBotAPI.
-func (v *VKBotAPI) PrintHello() {
-	fmt.Println("Hello from VKBot API! :D")
+func (a *VKAPI) Messages() vgtypes.VKMessagesAPI {
+	return NewVKMessagesAPI()
 }

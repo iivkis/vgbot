@@ -27,7 +27,7 @@ func (r *Router) IncludeRouter(router vgtypes.Router) {
 	panic("unimplemented")
 }
 
-func (r *Router) IncludeAdjuster(adjuster ...vgtypes.RouteAdjuster) {
+func (r *Router) IncludeHandler(adjuster ...vgtypes.RouteHandler) {
 	panic("unimplemented")
 }
 
