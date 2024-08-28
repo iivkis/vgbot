@@ -5,9 +5,11 @@ import (
 )
 
 func main() {
+	botapi := vgbot.NewVKBotAPI("")
+
 	r := vgbot.NewRouter()
 
 	r.IncludeAdjuster(
-		NewBasicHandler(),
+		NewBasicHandler(botapi),
 	)
 }

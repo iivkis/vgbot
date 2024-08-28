@@ -7,16 +7,22 @@ import (
 	vgtypes "github.com/iivkis/vgbot/types"
 )
 
-type BasicHandler struct{}
-
-func NewBasicHandler() vgtypes.RouteAdjuster {
-	return &BasicHandler{}
+type BasicHandler struct {
+	botapi vgtypes.VKBotAPI
 }
 
-func (b *BasicHandler) Setup(r vgtypes.Router) {
+func NewBasicHandler(
+	botapi vgtypes.VKBotAPI,
+) vgtypes.RouteAdjuster {
+	return &BasicHandler{
+		botapi: botapi,
+	}
+}
+
+func (h *BasicHandler) Setup(r vgtypes.Router) {
 	r.On(
 		vgstd.MessageFilter(),
 	)(func(ctx context.Context, update vgtypes.Update) {
-		println("hello world! :D")
+		h.botapi.PrintHello()
 	})
 }

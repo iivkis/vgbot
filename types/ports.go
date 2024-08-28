@@ -3,6 +3,7 @@ package vgtypes
 import "context"
 
 type VKBotAPI interface {
+	PrintHello()
 }
 
 type Middleware interface {
