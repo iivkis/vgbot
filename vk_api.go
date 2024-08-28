@@ -11,11 +11,11 @@ func NewVKMessagesAPI() vgtypes.VKMessagesAPI {
 	return &VKMessagesAPI{}
 }
 
-func (v *VKMessagesAPI) Delete(peerID int, messageID int) error {
+func (v *VKMessagesAPI) Delete(peerID int64, messageID int) error {
 	panic("unimplemented")
 }
 
-func (v *VKMessagesAPI) Send(peerID string, message string) error {
+func (v *VKMessagesAPI) Send(peerID int64, message string) error {
 	panic("unimplemented")
 }
 

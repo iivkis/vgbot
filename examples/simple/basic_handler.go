@@ -23,6 +23,6 @@ func (h *BasicHandler) Setup(r vgtypes.Router) {
 	r.On(
 		vgstd.MessageFilter(),
 	)(func(ctx context.Context, update vgtypes.Update) {
-		h.vkapi.Messages().Send("", "")
+		h.vkapi.Messages().Send(1, "hello, world! ")
 	})
 }

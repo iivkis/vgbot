@@ -17,8 +17,8 @@ type VKGroupsAPI interface {
 }
 
 type VKMessagesAPI interface {
-	Send(peerID, message string) error
-	Delete(peerID, messageID int) error
+	Send(peerID int64, message string) error
+	Delete(peerID int64, messageID int) error
 }
 
 type VKAPI interface {
