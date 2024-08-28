@@ -1,19 +1,7 @@
 package vgtypes
 
-type DataEncoder interface {
-	Encode() ([]byte, error)
-}
-
-type DataDecoder interface {
-	Decode(data []byte) error
-}
-
-type VKAPIProvider interface {
-	Call(method string, data DataEncoder) (DataDecoder, error)
-}
-
 type VKGroupsAPI interface {
-	GetLongPollServer(groupID int) GroupsGetLongPollServerResponse
+	GetLongPollServer(groupID int64) (*GroupsGetLongPollServerResponse, error)
 }
 
 type VKMessagesAPI interface {
@@ -22,5 +10,6 @@ type VKMessagesAPI interface {
 }
 
 type VKAPI interface {
+	Groups() VKGroupsAPI
 	Messages() VKMessagesAPI
 }

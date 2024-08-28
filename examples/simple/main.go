@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	vkapi := vgbot.NewVKAPI("")
+	vkapi := vgbot.NewVKAPI(vgbot.NewVKAPIProvider(""))
 
 	r := vgbot.NewRouter()
 

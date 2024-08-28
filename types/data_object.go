@@ -2,6 +2,14 @@ package vgtypes
 
 import "github.com/goccy/go-json"
 
+type DataEncoder interface {
+	Encode() ([]byte, error)
+}
+
+type DataDecoder interface {
+	Decode(data []byte) error
+}
+
 var (
 	_ DataEncoder = &DataObject{}
 	_ DataDecoder = &DataObject{}
@@ -15,13 +23,4 @@ func (d *DataObject) Encode() ([]byte, error) {
 
 func (d *DataObject) Decode(data []byte) error {
 	return json.Unmarshal(data, d)
-}
-
-type Update struct{}
-
-type GroupsGetLongPollServerResponse struct {
-	DataObject
-	Key       string `json:"key"`
-	Server    string `json:"server"`
-	Timestamp int    `json:"ts"`
 }
