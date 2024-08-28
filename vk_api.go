@@ -58,6 +58,7 @@ func NewVKAPI(provider vgtypes.VKAPIProvider) vgtypes.VKAPI {
 	return &VKAPI{
 		provider:    provider,
 		messagesAPI: NewVKMessagesAPI(provider),
+		groupsAPI:   NewVKGroupsAPI(provider),
 	}
 }
 

@@ -5,7 +5,13 @@ import "github.com/goccy/go-json"
 type Update struct{}
 
 type ReponseWrapper struct {
+	DataObject
 	Response json.RawMessage `json:"response"`
+	Error    json.RawMessage `json:"error"`
+}
+
+func (r *ReponseWrapper) Decode(data []byte) error {
+	return json.Unmarshal(data, r)
 }
 
 type GroupsGetLongPollServerRequest struct {

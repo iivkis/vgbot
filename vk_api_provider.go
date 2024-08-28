@@ -1,9 +1,10 @@
 package vgbot
 
 import (
+	"fmt"
+	"io"
 	"net/http"
 
-	"github.com/goccy/go-json"
 	vgtypes "github.com/iivkis/vgbot/types"
 )
 
@@ -34,12 +35,19 @@ func (v *VKAPIProvider) Call(method string, data vgtypes.DataEncoder, dst vgtype
 	}
 	defer res.Body.Close()
 
-	var response vgtypes.ReponseWrapper
-	if err := json.NewDecoder(req.Body).Decode(&response); err != nil {
+	b, err := io.ReadAll(res.Body)
+	if err != nil {
 		return err
 	}
 
-	if err := dst.Decode(response.Response); err != nil {
+	resWrap := &vgtypes.ReponseWrapper{}
+	if err := resWrap.Decode(b); err != nil {
+		return err
+	}
+
+	fmt.Println("434233432242342342423423")
+
+	if err := dst.Decode(resWrap.Response); err != nil {
 		return err
 	}
 
