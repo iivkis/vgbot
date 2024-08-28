@@ -1,5 +1,5 @@
 package vgtypes
 
 type VKAPIProvider interface {
-	Call(method string, data DataEncoder) ([]byte, error)
+	Call(method string, data DataEncoder, dst DataDecoder) error
 }

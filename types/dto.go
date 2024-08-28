@@ -1,6 +1,12 @@
 package vgtypes
 
+import "github.com/goccy/go-json"
+
 type Update struct{}
+
+type ReponseWrapper struct {
+	Response json.RawMessage `json:"response"`
+}
 
 type GroupsGetLongPollServerRequest struct {
 	DataObject
