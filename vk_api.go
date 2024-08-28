@@ -16,7 +16,7 @@ func NewVKGroupsAPI(provider vgtypes.VKAPIProvider) vgtypes.VKGroupsAPI {
 }
 
 func (v *VKGroupsAPI) GetLongPollServer(groupID int64) (*vgtypes.GroupsGetLongPollServerResponse, error) {
-	result, err := v.provider.Call(
+	res, err := v.provider.Call(
 		"groups.getLongPollServer",
 		&vgtypes.GroupsGetLongPollServerRequest{
 			GroupID: groupID,
@@ -25,7 +25,12 @@ func (v *VKGroupsAPI) GetLongPollServer(groupID int64) (*vgtypes.GroupsGetLongPo
 		return nil, err
 	}
 
-	return nil, nil
+	data := &vgtypes.GroupsGetLongPollServerResponse{}
+	if err := data.Decode(res); err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }
 
 // MessagesAPI

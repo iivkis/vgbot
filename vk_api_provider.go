@@ -21,6 +21,6 @@ func NewVKAPIProvider(token string) vgtypes.VKAPIProvider {
 }
 
 // Call implements vgtypes.VKAPIProvider.
-func (v *VKAPIProvider) Call(method string, data vgtypes.DataEncoder) (vgtypes.DataDecoder, error) {
+func (v *VKAPIProvider) Call(method string, data vgtypes.DataEncoder) ([]byte, error) {
 	panic("unimplemented")
 }
