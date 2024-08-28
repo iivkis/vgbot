@@ -16,7 +16,11 @@ type Router struct {
 }
 
 func NewRouter() vgtypes.Router {
-	return &Router{}
+	return &Router{
+		middlewares: make([]vgtypes.Middleware, 0),
+		routers:     make([]vgtypes.Router, 0),
+		handlers:    make([]*RouteHandler, 0),
+	}
 }
 
 func (r *Router) Handle(update vgtypes.Update) {
