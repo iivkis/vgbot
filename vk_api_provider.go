@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/goccy/go-json"
 	vgtypes "github.com/iivkis/vgbot/types"
 )
 
@@ -23,7 +24,7 @@ func NewVKAPIProvider(token string) vgtypes.VKAPIProvider {
 }
 
 // Call implements vgtypes.VKAPIProvider.
-func (v *VKAPIProvider) Call(method string, data vgtypes.DataEncoder, dst vgtypes.DataDecoder) error {
+func (v *VKAPIProvider) Call(method string, data vgtypes.DTORequest, dst vgtypes.DTOResponse) error {
 	req, err := http.NewRequest(http.MethodPost, v.baseURL+method, nil)
 	if err != nil {
 		return err
@@ -40,15 +41,17 @@ func (v *VKAPIProvider) Call(method string, data vgtypes.DataEncoder, dst vgtype
 		return err
 	}
 
-	resWrap := &vgtypes.ReponseWrapper{}
-	if err := resWrap.Decode(b); err != nil {
-		return err
+	var resWrap vgtypes.ReponseWrapper
+	if err := json.Unmarshal(b, &resWrap); err != nil {
+		return fmt.Errorf("failed to unmarshal response: %w", err)
 	}
 
-	fmt.Println("434233432242342342423423")
+	if resWrap.Error != nil {
+		return fmt.Errorf("VKAPIError: %s", string(resWrap.Error))
+	}
 
-	if err := dst.Decode(resWrap.Response); err != nil {
-		return err
+	if err := json.Unmarshal(resWrap.Response, dst); err != nil {
+		return fmt.Errorf("failed to unmarshal response data: %w", err)
 	}
 
 	return nil
